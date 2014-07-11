@@ -57,7 +57,9 @@ def main():
     
     for word in dict_wordfrec.keys(): 
         #if '\\u' in word: continue
-        print word, " ", dict_wordfrec[word]/total_words
+        unicode_string = word
+        encoded_string = word.encode('utf-8')
+        print word.replace("\n",""), " ", dict_wordfrec[word]/total_words
 
     tweet_file.close()
 
