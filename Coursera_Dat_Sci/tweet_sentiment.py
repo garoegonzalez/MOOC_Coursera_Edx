@@ -1,13 +1,6 @@
 import sys
 import json
 
-def hw():
-    print 'Hello, world!'
-
-def lines(fp):
-    '''Function to count the amount of lines in a file '''
-    print str(len(fp.readlines()))
-
 def load_score(sent_file):
     '''Function which store in a dictiory the word-score which comes from an external file'''
     scores = {} # initialize an empty dictionary
@@ -44,10 +37,6 @@ def tweet_score(scores,tweet):
 def main():
     sent_file = open(sys.argv[1])
     tweet_file = open(sys.argv[2])
-
-    #hw()
-    #lines(sent_file)
-    #lines(tweet_file)
 
     scores = load_score(sent_file)
     tweets = extract_tweets(tweet_file)
