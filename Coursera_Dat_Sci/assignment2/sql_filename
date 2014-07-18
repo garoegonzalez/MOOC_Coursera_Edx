@@ -1,6 +1,43 @@
 -- Problem 1
-SELECT count (*)
-FROM frequency
-WHERE docid='10398_txt_earn'
-;
+--SELECT count (*)
+--FROM frequency
+--WHERE docid='10398_txt_earn'
+--;
 
+
+--Problem 2
+--SELECT count (*)
+--FROM frequency
+--WHERE docid='10398_txt_earn' AND count='1'
+--;
+
+--Problem 3
+--SELECT count (*) FROM (
+--SELECT term FROM frequency WHERE docid='925_txt_trade' AND count=1.
+--UNION
+--SELECT term FROM frequency WHERE docid='10398_txt_earn' AND count=1.
+--)
+--;
+
+--Problem 4
+--SELECT count (*) FROM (
+--SELECT * FROM frequency WHERE term='parliament'
+--)
+--;
+
+--Problem 5
+--SELECT count(*) FROM (
+--SELECT docid 
+--FROM frequency
+--GROUP BY docid
+--HAVING  SUM (count) >300
+--)
+--;
+
+--Problem6
+--SELECT count(*) FROM (
+--SELECT * 
+--FROM frequency f1 ,frequency f2
+--WHERE f1.term='world' AND f2.term='transactions' AND f1.docid=f2.docid
+--)
+--;
