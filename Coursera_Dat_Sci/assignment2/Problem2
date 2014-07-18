@@ -1,8 +1,4 @@
---.schema
---SELECT * FROM TABLE A;
---SELECT col_num , row_num , value FROM a
---WHERE col_num=2 AND row_num=3;
-
+-- problem 6 
 SELECT SUM(A1.value*B1.value)
 FROM( 
 (SELECT * FROM a WHERE a.row_num=2) as A1
