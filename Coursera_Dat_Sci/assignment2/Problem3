@@ -1,0 +1,31 @@
+--Problem 8
+
+-- SELECT SUM(suma) FROM (
+-- SELECT SUM(f1.count*f2.count) AS suma  FROM  frequency f1 ,frequency f2
+-- WHERE f1.term = f2.term  AND f1.docid ='17035_txt_earn' AND  f2.docid ='10080_txt_crude'
+-- GROUP BY f1.term
+-- )
+-- ;
+
+-- Problem 9
+SELECT docid,SUM(count) FROM (
+SELECT f2.* FROM (
+       SELECT * FROM frequency
+       UNION
+       SELECT 'q' as docid, 'washington' as term, 1 as count 
+       UNION
+       SELECT 'q' as docid, 'taxes' as term, 1 as count
+       UNION 
+       SELECT 'q' as docid, 'treasury' as term, 1 as count
+       )  f1, (       SELECT * FROM frequency
+       UNION
+       SELECT 'q' as docid, 'washington' as term, 1 as count
+       UNION
+       SELECT 'q' as docid, 'taxes' as term, 1 as count
+       UNION
+       SELECT 'q' as docid, 'treasury' as term, 1 as count
+       ) f2 
+WHERE f1.term=f2.term AND f1.docid='q'
+)
+GROUP BY docid 
+ORDER BY SUM(count)
