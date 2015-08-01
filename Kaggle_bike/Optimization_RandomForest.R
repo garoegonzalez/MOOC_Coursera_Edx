@@ -66,6 +66,7 @@ best_mtry_value<-best_mtry[best_mtry[, 2] == min(best_mtry[, 2]),1]
 
 # We run our random Forest we the optimized mtry parameter ntree=500 and mtry = 9
 rf_optimal<- randomForest(extractFeatures(train), train$count, ntree=500, mtry=best_mtry_value)
+
 ### Result using the OOB internal cross validation
 ### Mean of squared residuals=1682.363
 ### % Var explained (R^2): 94.87
