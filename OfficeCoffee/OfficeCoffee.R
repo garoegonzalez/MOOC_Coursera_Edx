@@ -2,6 +2,7 @@ library("xlsx")
 library("lubridate")
 library("ggplot2")
 library("scales")
+library("reshape2")
 setwd("/Users/Garo/Desktop/GitHub/main_repository/OfficeCoffee")
 
 data_raw<-read.xlsx("Kawa-rozliczenia.xlsx",sheetIndex=1)
@@ -46,9 +47,18 @@ ggplot(data, aes(x=as.POSIXct(date),y=Total)) +
   theme_bw(base_family="Times")
 #ggsave("Measured_predicted_RF.pdf")
 
-ggplot(data,aes(x=as.POSIXct(date),y=LST)) +
+## We create a new data frame such that every person is converted in a
+## observable per measurements to easy perform an easy plotting
+data_Name<-melt(data,id.vars=c("Total","date","price"),variable.name="Name")
+
+ggplot(data_Name,aes(x=as.POSIXct(date),y=value,color=Name)) +
   geom_smooth(ce=FALSE, fill=NA, size=2)+
-  geom_point()
+  #geom_point()+
+  ylab("Absolute number of coffee's drunk")+
+  xlab("Date")+
+  ggtitle("Coffee's taken at MSR/DAR Gdanks office between Jul 2014 and Jul 2015")+
+  theme(plot.title=element_text(size=18))+
+  theme_bw(base_family="Times")
   #stat_bin(aes(y=cumsum(price)),geom="step")
   #stat_bin(data=subset(x,A=="a"),aes(y=cumsum(..count..)),geom="step")+
 
