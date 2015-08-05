@@ -1,7 +1,7 @@
 library("xlsx")
 library("lubridate")
 library("ggplot2")
-library(scales)
+library("scales")
 setwd("/Users/Garo/Desktop/GitHub/main_repository/OfficeCoffee")
 
 data_raw<-read.xlsx("Kawa-rozliczenia.xlsx",sheetIndex=1)
@@ -10,6 +10,8 @@ data_raw<-read.xlsx("Kawa-rozliczenia.xlsx",sheetIndex=1)
 data_clean<-data_raw[,-c(2,87,88)]
 # We invert the data frame
 data_clean<-t(data_clean)
+#We obtain the price of the coffee in each interval
+price<-as.numeric(data_clean[seq(3,nrow(data_clean),by=3),1])
 # We obtain the coffees per interval
 data_clean<-data_clean[c(1,seq(2,nrow(data_clean),by=3)),]
 data_clean[1,20]<-"Total"
@@ -27,6 +29,8 @@ colnames(data)<-Names
 # We add the timestamps and properly parser it as Date variable
 data$date<-data_clean[2:29,1]
 data$date<-as.Date(data$date,format="%d.%m.%Y")
+# We add the price of the coffee
+data$price<-price
 # We set all not registered numbers to 0
 data[is.na(data)]<-0
 
@@ -42,4 +46,9 @@ ggplot(data, aes(x=as.POSIXct(date),y=Total)) +
   theme_bw(base_family="Times")
 #ggsave("Measured_predicted_RF.pdf")
 
+ggplot(data,aes(x=as.POSIXct(date),y=LST)) +
+  geom_smooth(ce=FALSE, fill=NA, size=2)+
+  geom_point()
+  #stat_bin(aes(y=cumsum(price)),geom="step")
+  #stat_bin(data=subset(x,A=="a"),aes(y=cumsum(..count..)),geom="step")+
 
