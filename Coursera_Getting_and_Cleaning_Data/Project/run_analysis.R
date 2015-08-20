@@ -62,3 +62,4 @@ data$ActivityType<-factor(data$ActivityType,levels=c(1,2,3,4,5,6),labels = Activ
 ##### We end up with a dataframe of 180 rows (30 subjects* 6 activities)
 ### and 88 columns corresponding to all variables with mean and std
 tidydata<-aggregate( . ~ SubjectID+ActivityType, data, mean)
+write.table(tidydata,file="Project_tidy_dataset.csv",row.names=FALSE)
