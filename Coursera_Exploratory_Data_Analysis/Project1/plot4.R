@@ -44,8 +44,11 @@ with(data,plot(timestamp,Voltage,
                ylab = "Voltage",
                xlab ="DateTime"
 ))
-
-
-
+## Plot 4
+with(data,plot(timestamp,Global_reactive_power,
+               type="l",
+               ylab = "Global reactive power",
+               xlab ="DateTime"
+))
 ### We turn off the device
 dev.off()
